@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<header th:fragment="header" class="container-md">
+	<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom">
+		<a class="navbar-brand" href="/">
+			<img src="app/images/logo.jpg" style="width:140px">
+		</a>
+		<div class="d-flex justify-content-between align-items-center w-100">
+	        <form class="pt-3">
+		      <div class="p-1 bg-light rounded rounded-pill shadow-sm">
+	            <div class="input-group align-self-center">
+	              <input type="search" placeholder="전체 검색" name="keyword" id="keyword" aria-describedby="button-addon1" class="form-control border-0 bg-light">
+	              <div class="input-group-append">
+	                <button id="button-addon1" type="submit" class="btn btn-link text-warning"><i class="bi bi-search"></i></button>
+	              </div>
+	            </div>
+	          </div>
+	        </form>
+	    	<div>
+                <a class="btn btn-outline-warning"><i class="bi bi-box-arrow-in-left"></i> 로그인</a>
+                <a class="btn btn-outline-warning"><i class="bi bi-person-plus-fill"></i> 회원가입</a>
+                <!-- <a class="btn btn-outline-warning" ><i class="bi bi-box-arrow-right"></i> 로그아웃</a>
+                <a class="btn btn-outline-warning"><i class="bi bi-pencil-square"></i> 글쓰기</a>
+				<div class="btn-group">
+				  <button type="button" class="btn btn-outline-warning dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+				  	<i class="bi bi-person-fill"></i>
+				    MY 당근
+				  </button>
+				  <div class="dropdown-menu">
+	                <a class="dropdown-item" ><i class="bi bi-person-lines-fill"></i> 내 정보</a>
+	                <a class="dropdown-item" ><i class="bi bi-bag-dash"></i> 판매내역</a>
+	                <a class="dropdown-item" ><i class="bi bi-bag-plus"></i> 구매내역</a>
+	                <a class="dropdown-item" ><i class="bi bi-envelope-paper"></i> 받은 쪽지함</a>
+	                <a class="dropdown-item" ><i class="bi bi-envelope"></i> 보낸 쪽지함</a>
+				  </div>
+				</div> -->	                
+            </div>
+        </div>
+	    <div class="nav-scroller py-1 mb-2">
+	        <nav class="nav d-flex justify-content-between">
+	        </nav>
+	    </div>
+	</div>
+</header>
+</html>

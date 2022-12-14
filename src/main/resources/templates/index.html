@@ -1,12 +1,69 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+
+</head>      
 <body>
-	<h1>hello</h1>
+<th:block layout:fragment="content">
+    <!--main start-->
+    <main role="main">
+		<div class="album pt-3 pb-1">
+		    <div class="container">
+		    	<h3 class="mb-5">전체 목록</h3>
+		   		<div class="d-flex flex-row-reverse mb-3">
+<!-- 			        <c:if test="${c != null}">
+			        	<form class="form-inline" id="districtForm">
+			        		<input type="hidden" name="city" value="${c}"/>
+					        <select class="form-control ml-3" id="district" name="district">
+					            <option>지역을 선택해주세요.</option>
+					            <c:forEach var="district" items="${districtList.districtList}">
+					                <option <c:if test="${d eq district}">selected</c:if>>${district}</option>
+					            </c:forEach>
+					        </select>
+				        </form>
+			        </c:if> -->
+			        <form class="form-inline" id="cityForm">
+				        <select class="form-control ml-3" id="city" name="city">
+				            <option>지역을 선택해주세요.</option>
+				  <!--           <c:forEach var="city" items="${cityList}">
+				                <option <c:if test="${c eq city.city}">selected</c:if>>${city.city}</option>
+				            </c:forEach> -->
+				        </select>
+			        </form>
+		        </div>
+		        <!-- <c:if test="${count==0}"> -->
+			   	<!-- 등록된 상품이 없습니다 -->
+			   <!-- </c:if> -->  
+		        <div class="row">
+					<div class="col-md-3">
+						<a class="text-decoration-none text-dark" href="">
+	                        <div class="mb-4 shadow-sm">
+	                        	<img class="bd-placeholder-img card-img-top" src="${ctxpath}/static/images/carrot.png" width="100%" height="200" />
+	                            <div class="card-body">
+									<p class="card-text h5"
+	                                    style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis">test
+	                                </p>
+	                                <p class="card-text font-weight-bold">
+	                                   	1000원
+	                                </p1>
+	                                    <p class="card-text my-0">서울시 강남구</p>
+	                                    <div class="d-flex justify-content-between align-items-center">
+	                                        <small class="text-muted">10분 전</small><!-- 몇분전 게시글로 수정 -->
+	                                        <small class="text-muted"><i class="bi bi-heart"></i> 10<i
+	                                                class="bi bi-eye"></i>10</small>
+	                                    </div>
+	                            </div>
+	                        </div>
+						</a>
+					</div>
+		        </div>
+		    </div>
+		</div>    	
+    </main>
+    <!-- main end-->
+</th:block>
 </body>
 </html>
