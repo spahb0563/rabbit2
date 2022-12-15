@@ -1,7 +1,5 @@
 package com.thejoen.rabbit2.model.entity;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,10 +27,5 @@ public class Address {
 		this.city = city;
 		this.district = district;
 	}
-	
-
-	
-    
-    
 
 }

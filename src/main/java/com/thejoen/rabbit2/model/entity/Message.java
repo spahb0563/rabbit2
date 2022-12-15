@@ -21,7 +21,9 @@ public class Message {
 	private Long id;
     
 	private String content;
+	
 	private Integer status;
+	
 	private LocalDateTime createdAt;
 	
 	@ManyToOne
@@ -37,6 +39,4 @@ public class Message {
 		this.receiver = receiver;
 		this.sender = sender;
     }
-
-
 }
