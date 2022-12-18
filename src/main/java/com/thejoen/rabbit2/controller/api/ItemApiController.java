@@ -1,4 +1,4 @@
-package com.thejoen.rabbit2.controller.page;
+package com.thejoen.rabbit2.controller.api;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

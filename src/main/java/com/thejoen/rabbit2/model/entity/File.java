@@ -21,23 +21,28 @@ public class File {
 	private Long id;
 
 	private String name;
+	
 	private String savedname;
+	
 	private String path;
+	
 	private Integer size;
+	
 	private String type;
+	
 	private LocalDateTime createdAt;
 	
 	@ManyToOne
-	private Item fileitem;
+	private Item item;
 	
 	@Builder
-	public File(String name, String savedname, String path, Integer size, String type, Item fileitem) {
+	public File(String name, String savedname, String path, Integer size, String type, Item item) {
 		this.name = name;
 		this.savedname = savedname;
 		this.path = path;
 		this.size = size;
 		this.type = type;
-		this.fileitem = fileitem;
+		this.item = item;
 	}
 
 

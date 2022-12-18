@@ -1,8 +1,5 @@
 package com.thejoen.rabbit2.model.entity;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +14,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Entity
 public class Wishlist {
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -25,13 +23,12 @@ public class Wishlist {
 	private Member member;
 	
 	@ManyToOne
-	private Item wishitem;
+	private Item item;
 
 	@Builder
-	public Wishlist(Member member, Item wishitem) {
+	public Wishlist(Member member, Item item) {
 		super();
 		this.member = member;
-		this.wishitem = wishitem;
+		this.item = item;
 	}
-
 }

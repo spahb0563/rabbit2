@@ -1,5 +1,6 @@
 package com.thejoen.rabbit2.model.entity;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -19,17 +20,25 @@ import lombok.NoArgsConstructor;
 @Getter
 @Entity
 public class Item {
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
     
 	private String title;
+	
 	private String content;
-	private Integer price;
-	private String status;
-	private Integer view_count;
-	private Integer like_count;
+	
+	private BigDecimal price;
+	
+	private int status;
+	
+	private int view_count;
+	
+	private int like_count;
+	
 	private LocalDateTime createdAt;
+	
 	private LocalDateTime updatedAt;
 	
 	@ManyToOne
@@ -41,25 +50,18 @@ public class Item {
 	@ManyToOne
 	private Category category;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "wishitem")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "item")
 	private List<Wishlist> wishList;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fileitem")
-	private List<File> file;
-	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "item")
+	private List<File> fileList;
 	
 	@Builder
-	public Item(String title, String content, Integer price, String status, 
-			Integer view_count, Integer like_count,
-			Member buyer,Member seller,Category category) {
+	public Item(String title, String content, BigDecimal price, Member seller, Category category) {
 		this.title = title;
 		this.content = content;
 		this.price = price;
-		this.status = status;
-		this.view_count = view_count;
-		this.like_count = like_count;
+		this.seller = seller;
+		this.category = category;
 	}
-	
-	
-
 }
