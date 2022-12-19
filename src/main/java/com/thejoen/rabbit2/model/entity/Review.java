@@ -22,7 +22,7 @@ public class Review {
 	private Long id;
 	
 	private String content;
-	private LocalDateTime createdAt;
+
 	
 	@ManyToOne
 	private Member target;

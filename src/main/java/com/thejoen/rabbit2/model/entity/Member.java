@@ -1,6 +1,5 @@
 package com.thejoen.rabbit2.model.entity;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -17,17 +16,23 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 @Entity
-public class Member {
+public class Member extends BaseTimeEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
     
 	private String email;
+	
 	private String password;
+	
 	private String nickname;
+	
 	private String name;
-	private String address;
-	private String zipcode;
+	
+	private String picture;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
+	private List<MyTown> myTownList;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "target")
 	private List<Review> recievedReview;
@@ -36,32 +41,25 @@ public class Member {
 	private List<Review> writedReview;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "buyer")
-	private List<Item> buyItem;
+	private List<Item> purchasedItemList;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "seller")
-	private List<Item> sellItem;
+	private List<Item> salesItemList;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "receiver")
-	private List<Message> reveiveMessage;
+	private List<Message> receivedMessageList;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "sender")
-	private List<Message> sendMessage;
+	private List<Message> sentMessageList;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
-	private List<Wishlist> wishlist;
-	
-	private LocalDateTime createdAt;
-	private LocalDateTime updatedAt;
+	private List<WishList> wishList;
 	 
 	@Builder
-	public Member(String email, String password, String nickname, String name, String address, String zipcode) {
+	public Member(String email, String password, String nickname, String name) {
 		this.email = email;
 		this.password = password;
 		this.nickname = nickname;
         this.name = name;
-        this.address = address;
-        this.zipcode = zipcode;
     }
-	 
-
 }

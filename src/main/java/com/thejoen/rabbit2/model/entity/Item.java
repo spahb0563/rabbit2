@@ -51,7 +51,7 @@ public class Item {
 	private Category category;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "item")
-	private List<Wishlist> wishList;
+	private List<WishList> wishList;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "item")
 	private List<File> fileList;

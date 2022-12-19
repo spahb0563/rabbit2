@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 @Entity
-public class Wishlist {
+public class WishList {
 	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +26,7 @@ public class Wishlist {
 	private Item item;
 
 	@Builder
-	public Wishlist(Member member, Item item) {
+	public WishList(Member member, Item item) {
 		super();
 		this.member = member;
 		this.item = item;
