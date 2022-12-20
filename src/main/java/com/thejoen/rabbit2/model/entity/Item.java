@@ -64,4 +64,11 @@ public class Item {
 		this.seller = seller;
 		this.category = category;
 	}
+	
+	public void update(String title, String content, BigDecimal price, Category category) {
+		this.title = title;
+		this.content = content;
+		this.price = price;
+		this.category = category;
+	}
 }
