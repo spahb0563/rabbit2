@@ -24,6 +24,8 @@ public class ItemResponseDTO {
 	
 	private int like_count;
 	
+//	private Long CategoryId;
+	
 	private LocalDateTime createdAt;
 	
 	private LocalDateTime updatedAt;
@@ -36,5 +38,6 @@ public class ItemResponseDTO {
 		this.status = item.getStatus();
 		this.view_count = item.getView_count();
 		this.like_count = item.getLike_count();
+//		this.CategoryId = item.getCategory().getId();
 	}
 }

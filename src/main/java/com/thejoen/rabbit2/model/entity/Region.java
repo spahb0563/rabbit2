@@ -37,6 +37,4 @@ public class Region extends BaseTimeEntity{
 		this.city = city;
 		this.town = town;
 	}
-	
-	
 }
