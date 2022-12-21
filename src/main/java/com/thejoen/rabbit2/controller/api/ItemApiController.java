@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.thejoen.rabbit2.model.network.dto.item.ItemRequestDTO;
+import com.thejoen.rabbit2.model.network.dto.item.ItemCreateRequestDTO;
 import com.thejoen.rabbit2.model.network.dto.item.ItemResponseDTO;
+import com.thejoen.rabbit2.model.network.dto.item.ItemUpdateRequestDTO;
 import com.thejoen.rabbit2.service.ItemService;
 
 import lombok.RequiredArgsConstructor;
@@ -29,18 +30,20 @@ public class ItemApiController {
 	}
 	
 	@PostMapping("/item")
-	public ResponseEntity<ItemResponseDTO> create(@RequestBody ItemRequestDTO request) {
+	public ResponseEntity<ItemResponseDTO> create(@RequestBody ItemCreateRequestDTO request) {
 		return itemService.create(request);
 	}
 	
 	@PutMapping("/item/{id}")
-	public ReponseEntity<ItemResponseDTO> update(@PathVariable Long id, @RequestBody ItemUpdateRequestDTO request) {
-		return itemService.update(request);
+	public ResponseEntity<ItemResponseDTO> update(@PathVariable Long id, @RequestBody ItemUpdateRequestDTO request) {
+		
+		return itemService.update(id, request);
 	}
 	
 	@DeleteMapping("/item/{id}")
-	public ReponseEntity update(@PathVariable Long id, @RequestBody ItemUpdateRequestDTO request) { 
-	
+	public ResponseEntity delete(@PathVariable Long id) { 
+		
+		return itemService.delete(id);
 	}
 	
 	

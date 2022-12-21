@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.thejoen.rabbit2.model.entity.WishList;
 
-public interface WishlistRepository extends JpaRepository<WishList, Long>{
+public interface WishListRepository extends JpaRepository<WishList, Long>{
 
 }

@@ -10,7 +10,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class ItemRequestDTO {
+public class ItemCreateRequestDTO {
     
 	private String title;
 	
@@ -23,7 +23,7 @@ public class ItemRequestDTO {
 	private Long categoryId;
 
 	@Builder
-	public ItemRequestDTO(String title, String content, BigDecimal price, Long sellerId, Long categoryId) {
+	public ItemCreateRequestDTO(String title, String content, BigDecimal price, Long sellerId, Long categoryId) {
 		this.title = title;
 		this.content = content;
 		this.price = price;

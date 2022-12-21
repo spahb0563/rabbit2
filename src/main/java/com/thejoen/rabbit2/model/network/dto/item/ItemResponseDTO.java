@@ -3,7 +3,11 @@ package com.thejoen.rabbit2.model.network.dto.item;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import com.thejoen.rabbit2.model.entity.Category;
 import com.thejoen.rabbit2.model.entity.Item;
+import com.thejoen.rabbit2.model.enumclass.ItemStatus;
+import com.thejoen.rabbit2.model.network.dto.category.CategoryResponseDTO;
+import com.thejoen.rabbit2.model.network.dto.member.MemberResponseDTO;
 
 import lombok.Getter;
 
@@ -18,13 +22,15 @@ public class ItemResponseDTO {
 	
 	private BigDecimal price;
 	
-	private int status;
+	private ItemStatus status;
 	
 	private int view_count;
 	
 	private int like_count;
 	
-//	private Long CategoryId;
+	private MemberResponseDTO member;
+	
+	private CategoryResponseDTO category;
 	
 	private LocalDateTime createdAt;
 	
@@ -38,6 +44,9 @@ public class ItemResponseDTO {
 		this.status = item.getStatus();
 		this.view_count = item.getView_count();
 		this.like_count = item.getLike_count();
-//		this.CategoryId = item.getCategory().getId();
+		this.createdAt = item.getCreatedAt();
+		this.updatedAt = item.getUpdatedAt();
+		this.member = new MemberResponseDTO(item.getSeller());
+		this.category = new CategoryResponseDTO(item.getCategory());
 	}
 }

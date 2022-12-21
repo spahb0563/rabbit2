@@ -28,13 +28,19 @@ public class Region extends BaseTimeEntity{
 	
 	private String town;
 	
+	private double lat;
+	
+	private double lon;
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "region")
 	private List<MyTown> MyTownList;
 	
 	@Builder
-	public Region(String district, String city, String town) {
+	public Region(String district, String city, String town, double lat, double lon) {
 		this.district = district;
 		this.city = city;
 		this.town = town;
+		this.lat = lat;
+		this.lon = lon;
 	}
 }

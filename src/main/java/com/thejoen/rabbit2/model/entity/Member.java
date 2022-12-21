@@ -27,8 +27,6 @@ public class Member extends BaseTimeEntity{
 	
 	private String nickname;
 	
-	private String name;
-	
 	private String picture;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
@@ -56,10 +54,19 @@ public class Member extends BaseTimeEntity{
 	private List<WishList> wishList;
 	 
 	@Builder
-	public Member(String email, String password, String nickname, String name) {
+	public Member(String email, String password, String nickname, List<MyTown> myTownList) {
 		this.email = email;
 		this.password = password;
 		this.nickname = nickname;
-        this.name = name;
+        this.myTownList = myTownList;
     }
+	
+	public void updateProfile(String nickname, String picture) {
+		this.nickname = nickname;
+		this.picture = picture;
+	}
+	
+	public void updatePassword(String password) {
+		this.password = password;
+	}
 }
