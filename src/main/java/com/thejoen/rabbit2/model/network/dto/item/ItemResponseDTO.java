@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import com.thejoen.rabbit2.model.entity.Category;
 import com.thejoen.rabbit2.model.entity.Item;
 import com.thejoen.rabbit2.model.enumclass.ItemStatus;
+import com.thejoen.rabbit2.model.network.dto.category.CategoryListResponseDTO;
 import com.thejoen.rabbit2.model.network.dto.category.CategoryResponseDTO;
 import com.thejoen.rabbit2.model.network.dto.member.MemberResponseDTO;
 
@@ -24,11 +25,11 @@ public class ItemResponseDTO {
 	
 	private ItemStatus status;
 	
-	private int view_count;
+	private int viewCount;
 	
-	private int like_count;
+	private int likeCount;
 	
-	private MemberResponseDTO member;
+	private MemberResponseDTO seller;
 	
 	private CategoryResponseDTO category;
 	
@@ -42,11 +43,11 @@ public class ItemResponseDTO {
 		this.content = item.getContent();
 		this.price = item.getPrice();
 		this.status = item.getStatus();
-		this.view_count = item.getView_count();
-		this.like_count = item.getLike_count();
+		this.viewCount = item.getViewCount();
+		this.likeCount = item.getLikeCount();
 		this.createdAt = item.getCreatedAt();
 		this.updatedAt = item.getUpdatedAt();
-		this.member = new MemberResponseDTO(item.getSeller());
+		this.seller = new MemberResponseDTO(item.getSeller());
 		this.category = new CategoryResponseDTO(item.getCategory());
 	}
 }

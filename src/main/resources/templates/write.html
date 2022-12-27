@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head>
+	<style>
+	    #att_zone {
+	        width: 660px;
+	        min-height: 150px;
+	        padding: 10px;
+	        border: 1px dotted #00f;
+	    }
+	    #att_zone:empty:before {
+	        content: attr(data-placeholder);
+	        color: #999;
+	        font-size: .9em;
+	    }
+	</style>
+</head>
+<th:block layout:fragment="content">
+	<div class="container">
+		<div class="row justify-content-md-center">
+		    <form>
+		        <div id='image_preview'>
+		            <input type='file' id='btnAtt' name="file" accept="image/png, image/jpeg, image/jpg" multiple="multiple"/>
+		            <div id='att_zone' data-placeholder='파일을 첨부 하려면 파일 선택 버튼을 클릭하거나 파일을 드래그앤드롭 하세요'></div>
+		        </div>
+		        <div class="form-group">
+		            <label for="title">제목</label>
+		            <input type="text" class="form-control" id="title">
+		        </div>
+		        <div class="form-group">
+		            <label for="content">내용</label>
+		            <textarea class="form-control" id="content"rows="15"></textarea>
+		        </div>
+		        <div class="row">
+					<div class="form-group col-6">
+			        	<label for="category">카테고리</label>
+			        	<select class="form-control" id="category" >
+			        			<option>카테고리를 선택해주세요.</option>
+			        			<option th:each="category : ${categoryList}" th:value="${category.id}" th:text="${category.title}"></option>
+			        	</select>	
+			        </div>
+			        <div class="form-group col-6">
+			        	<label for="price">가격</label>
+						<input type="text" class="form-control" id="price">
+			        </div>
+		        </div>
+		        <div class="row">
+		            <div class="col text-right">
+		                <a class="btn btn-dark" th:href="@{/}">취소</a>
+		                <button type="button" class="btn btn-warning" id="btn-write">작성</button>
+		            </div>
+		        </div>
+		    </form>
+		</div>
+	</div>
+	<script src="/app/js/imageUploader.js"></script>
+	<script src="/app/js/write.js"></script>
+</th:block>
+</html>

@@ -6,7 +6,6 @@ import lombok.Getter;
 
 @Getter
 public class CategoryResponseDTO {
-	
 	private Long id;
 	
 	private String title;

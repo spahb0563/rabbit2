@@ -3,11 +3,15 @@ package com.thejoen.rabbit2.model.entity;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import com.thejoen.rabbit2.model.enumclass.MemberRole;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -28,6 +32,9 @@ public class Member extends BaseTimeEntity{
 	private String nickname;
 	
 	private String picture;
+	
+	@Enumerated(EnumType.STRING)
+	private MemberRole role;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
 	private List<MyTown> myTownList;
@@ -54,11 +61,11 @@ public class Member extends BaseTimeEntity{
 	private List<WishList> wishList;
 	 
 	@Builder
-	public Member(String email, String password, String nickname, List<MyTown> myTownList) {
+	public Member(String email, String password, String nickname, MemberRole role) { 
 		this.email = email;
 		this.password = password;
 		this.nickname = nickname;
-        this.myTownList = myTownList;
+        this.role = role;
     }
 	
 	public void updateProfile(String nickname, String picture) {

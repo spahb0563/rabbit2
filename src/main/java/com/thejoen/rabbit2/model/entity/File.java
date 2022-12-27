@@ -44,11 +44,4 @@ public class File {
 		this.type = type;
 		this.item = item;
 	}
-
-
-	
-	
-	
-	
-
 }

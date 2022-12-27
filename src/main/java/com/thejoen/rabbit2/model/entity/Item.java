@@ -44,9 +44,9 @@ public class Item extends BaseTimeEntity{
 	@Enumerated(EnumType.STRING)
 	private ItemStatus status;
 	
-	private int view_count;
+	private int viewCount;
 	
-	private int like_count;
+	private int likeCount;
 	
 	@ManyToOne
 	private Member buyer;
@@ -57,6 +57,9 @@ public class Item extends BaseTimeEntity{
 	@ManyToOne
 	private Category category;
 	
+	@ManyToOne
+	private Region region;
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "item")
 	private List<WishList> wishList;
 	
@@ -64,12 +67,14 @@ public class Item extends BaseTimeEntity{
 	private List<File> fileList;
 	
 	@Builder
-	public Item(String title, String content, BigDecimal price, Member seller, Category category) {
+	public Item(String title, String content, BigDecimal price, ItemStatus status, Member seller, Category category, Region region) {
 		this.title = title;
 		this.content = content;
 		this.price = price;
+		this.status = status;
 		this.seller = seller;
 		this.category = category;
+		this.region = region;
 	}
 
 	public void update(String title, String content, BigDecimal price, Category category) {

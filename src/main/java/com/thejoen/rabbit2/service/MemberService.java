@@ -1,9 +1,10 @@
 package com.thejoen.rabbit2.service;
 
-import javax.transaction.Transactional;
-
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.thejoen.rabbit2.exception.MemberNotFoundException;
 import com.thejoen.rabbit2.exception.RegionNotFoundException;
@@ -29,12 +30,14 @@ public class MemberService {
 
 	private final MyTownRepository myTownRepository;
 	
+	private final PasswordEncoder passwordEncoder;
+	
 	@Transactional
 	public ResponseEntity<MemberResponseDTO> create(MemberCreateRequestDTO request) {
-		Region region = regionRepository.findById(request.getRegionId())
+		Region region = regionRepository.findByAddress(request.getAddress())
 				.orElseThrow(() -> new RegionNotFoundException());
 		
-		Member member = memberRepository.save(request.toEntitiy());
+		Member member = memberRepository.save(request.toEntitiy(passwordEncoder.encode(request.getPassword())));
 		
 		myTownRepository.save(MyTown.builder()
 				.region(region)
@@ -43,7 +46,8 @@ public class MemberService {
 				.build()
 				);
 		
-		return ResponseEntity.ok(new MemberResponseDTO(member));
+		return ResponseEntity.status(HttpStatus.CREATED).
+				body(new MemberResponseDTO(member));
 	}
 	
 	public ResponseEntity<MemberResponseDTO> read(Long id) {
@@ -54,14 +58,16 @@ public class MemberService {
 	}
 
 	@Transactional
-	public Long update(Long id, MemberUpdateRequestDTO memberRequestDTO) {
+	public ResponseEntity<MemberResponseDTO> update(Long id, MemberUpdateRequestDTO memberRequestDTO) {
 		Member member=memberRepository.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("해당 멤버가 없습니다."));
+				.orElseThrow(() -> new MemberNotFoundException());
 		
 		String nickname=memberRequestDTO.getNickname();
 		String picture=memberRequestDTO.getPicture();
 		
-		return id;
+		member.updateProfile(nickname, picture);
+		
+		return ResponseEntity.ok(new MemberResponseDTO(member));
 	}
 	
 	@Transactional

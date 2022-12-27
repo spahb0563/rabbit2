@@ -12,16 +12,17 @@
 						style="height: 300px" />
 				</div>
 				<div class="w-25">
-					<form method="post" action="">
+					<form method="post" th:action="@{/login_proc}">
+						<input th:type="hidden" th:value="secret" name="secret_key">
 						<div class="form-group">
-							<label for="inputEmail">이메일 주소</label> <input type="email"
-								name="email" id="inputEmail" class="form-control"
+							<label for="email">이메일 주소</label> <input type="email"
+								name="email" id="email" class="form-control"
 								placeholder="Email Address" required="required"
 								autofocus="autofocus">
 						</div>
 						<div class="form-group">
-							<label for="inputPassword">비밀번호</label> <input type="password"
-								name="pw" id="inputPassword" class="form-control"
+							<label for="password">비밀번호</label> <input type="password"
+								name="password" id="password" class="form-control"
 								placeholder="Password" required="required">
 						</div>
 						<div class="mb-3">

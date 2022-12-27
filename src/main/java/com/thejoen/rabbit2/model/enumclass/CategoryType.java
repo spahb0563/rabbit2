@@ -7,7 +7,6 @@ import lombok.Getter;
 @Getter
 public enum CategoryType {
 	
-	
     COMPUTER(0, "컴퓨터-전자제품"),
     
     CLOTHING(1, "의류"),

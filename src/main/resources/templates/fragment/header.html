@@ -5,7 +5,7 @@
 <header th:fragment="header" class="container-md">
 	<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom">
 		<a class="navbar-brand" href="/">
-			<img src="app/images/logo.jpg" style="width:140px">
+			<img th:src="@{/app/images/logo.jpg}" style="width:140px">
 		</a>
 		<div class="d-flex justify-content-between align-items-center w-100">
 	        <form class="pt-3">
@@ -19,23 +19,27 @@
 	          </div>
 	        </form>
 	    	<div>
-                <a class="btn btn-outline-warning" th:href="@{/login}"><i class="bi bi-box-arrow-in-left"></i> 로그인</a>
-                <a class="btn btn-outline-warning" th:href="@{/register}"><i class="bi bi-person-plus-fill"></i> 회원가입</a>
-                <!-- <a class="btn btn-outline-warning" ><i class="bi bi-box-arrow-right"></i> 로그아웃</a>
-                <a class="btn btn-outline-warning"><i class="bi bi-pencil-square"></i> 글쓰기</a>
-				<div class="btn-group">
-				  <button type="button" class="btn btn-outline-warning dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-				  	<i class="bi bi-person-fill"></i>
-				    MY 당근
-				  </button>
-				  <div class="dropdown-menu">
-	                <a class="dropdown-item" ><i class="bi bi-person-lines-fill"></i> 내 정보</a>
-	                <a class="dropdown-item" ><i class="bi bi-bag-dash"></i> 판매내역</a>
-	                <a class="dropdown-item" ><i class="bi bi-bag-plus"></i> 구매내역</a>
-	                <a class="dropdown-item" ><i class="bi bi-envelope-paper"></i> 받은 쪽지함</a>
-	                <a class="dropdown-item" ><i class="bi bi-envelope"></i> 보낸 쪽지함</a>
-				  </div>
-				</div> -->	                
+	    		<th:block sec:authorize="isAnonymous()">
+	                <a class="btn btn-outline-warning" th:href="@{/login}"><i class="bi bi-box-arrow-in-left"></i> 로그인</a>
+	                <a class="btn btn-outline-warning" th:href="@{/register}"><i class="bi bi-person-plus-fill"></i> 회원가입</a>
+                </th:block>
+                <th:block sec:authorize="isAuthenticated()">
+	                <a class="btn btn-outline-warning" th:href="@{/logout}"><i class="bi bi-box-arrow-right"></i> 로그아웃</a>
+	                <a class="btn btn-outline-warning" th:href="@{/item/write}"><i class="bi bi-pencil-square"></i> 글쓰기</a>
+					<div class="btn-group">
+					  <button type="button" class="btn btn-outline-warning dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+					  	<i class="bi bi-person-fill"></i>
+					    MY 당근
+					  </button>
+					  <div class="dropdown-menu">
+		                <a class="dropdown-item" th:href="@{/member/my-info}"><i class="bi bi-person-lines-fill"></i> 내 정보</a>
+		                <a class="dropdown-item" th:href="@{/member/sale-list}"><i class="bi bi-bag-dash"></i> 판매내역</a>
+		                <a class="dropdown-item" th:href="@{/member/buy-list}"><i class="bi bi-bag-plus"></i> 구매내역</a>
+<!-- 		                <a class="dropdown-item" th:href="@{/member/message-list}"><i class="bi bi-envelope-paper"></i> 받은 쪽지함</a>
+		                <a class="dropdown-item" th:href="@{}"><i class="bi bi-envelope"></i> 보낸 쪽지함</a> -->
+					  </div>
+					</div>
+				</th:block>	                
             </div>
         </div>
 	    <div class="nav-scroller py-1 mb-2">
