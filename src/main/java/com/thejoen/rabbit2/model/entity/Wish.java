@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 @Entity
-public class WishList {
+public class Wish extends BaseTimeEntity{
 	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,8 +26,7 @@ public class WishList {
 	private Item item;
 
 	@Builder
-	public WishList(Member member, Item item) {
-		super();
+	public Wish(Member member, Item item) {
 		this.member = member;
 		this.item = item;
 	}

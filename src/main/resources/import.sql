@@ -836,10 +836,8 @@ insert into region (district, city, town, lat, lon, created_at, updated_at) valu
 insert into region (district, city, town, lat, lon, created_at, updated_at) values('서울특별시','종로구','사직동',37.576196,126.9688397,now(), now())
 insert into region (district, city, town, lat, lon, created_at, updated_at) values('서울특별시','종로구','청운효자동',37.5841367,126.9706519,now(), now())
 
-insert into member(role,email, password, nickname, picture, created_at, updated_at) values('ROLE_USER','spahb0563@naver.com', '10313ans', 'ans0563', 'test', now(), now());
-
 insert into member(role,email, password, nickname, picture, created_at, updated_at) values('ROLE_USER','ans0563@naver.com','{bcrypt}$2a$10$77Dr65g53xWmUYQeQEYgdekjVQ9lYqWTfM7m2vtG31kQbKmlKPQqS', 'ans0563', 'test', now(), now());
 
 insert into my_town(member_id, region_id, status,created_at, updated_at) values(1, 1, 'TEST', now(), now());
 
-insert into item(title, content, price, status, view_count, like_count, buyer_id, seller_id, category_id, created_at, updated_at) values('test', 'test', 1000, 'ON_SALE', 0, 0, null, 1, 1, now(), now())
+insert into item(title, content, price, status, view_count, like_count, buyer_id, seller_id, category_id, region_id, created_at, updated_at) values('test', 'test', 1000, 'ON_SALE', 0, 0, null, 1, 1, 1, now(), now())

@@ -26,9 +26,8 @@ $('#search-region').autocomplete({
 	select : function(event, ui) {
 		$('#region').val(ui.item.value);
 		
-		var locPosition = new kakao.maps.LatLng(ui.item.lat, ui.item.lon), 
-        message = '<div>설정 위치</div>';
+		var locPosition = new kakao.maps.LatLng(ui.item.lat, ui.item.lon)
 	            
-        displayMarker(locPosition, message);
+        displayMarker(locPosition)
 	}
 });

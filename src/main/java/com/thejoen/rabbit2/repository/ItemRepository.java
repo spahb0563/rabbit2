@@ -9,5 +9,6 @@ import com.thejoen.rabbit2.model.entity.Item;
 
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Long>, ItemRepositoryCustom{
+	
 	List<Item> findAllByTitle(String title);
 }

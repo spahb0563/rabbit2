@@ -1,23 +1,23 @@
 package com.thejoen.rabbit2.model.network.dto.item;
 
-import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 
 import com.thejoen.rabbit2.model.entity.Item;
 import com.thejoen.rabbit2.model.enumclass.ItemStatus;
-import com.thejoen.rabbit2.model.network.dto.member.MemberResponseDTO;
+import com.thejoen.rabbit2.model.network.Time;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 public class ItemListResponseDTO {
-private Long id;
+	private Long id;
 	
 	private String title;
 	
-	private String content;
-	
-	private BigDecimal price;
+	private BigInteger price;
 	
 	private ItemStatus status;
 	
@@ -25,9 +25,11 @@ private Long id;
 	
 	private int likeCount;
 	
-	private MemberResponseDTO seller;
+	private String city;
 	
-	private LocalDateTime updatedAt;
+	private String town;
+	
+	private String updatedAt;
 	
 	public ItemListResponseDTO(Item item) {
 		this.id = item.getId();
@@ -36,7 +38,18 @@ private Long id;
 		this.status = item.getStatus();
 		this.viewCount = item.getViewCount();
 		this.likeCount = item.getLikeCount();
-		this.updatedAt = item.getUpdatedAt();
-		this.seller = new MemberResponseDTO(item.getSeller());
+		this.updatedAt = Time.convertLocalDateTimeToTime(item.getUpdatedAt());
+	}
+
+	public ItemListResponseDTO(Long id, String title, BigInteger price, ItemStatus status, int viewCount, int likeCount,
+			String city, String town, LocalDateTime updatedAt) {
+		this.id = id;
+		this.title = title;
+		this.price = price;
+		this.status = status;
+		this.viewCount = viewCount;
+		this.likeCount = likeCount;
+		this.town = city + " " + town;
+		this.updatedAt = Time.convertLocalDateTimeToTime(updatedAt);
 	}
 }

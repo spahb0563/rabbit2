@@ -1,6 +1,6 @@
 package com.thejoen.rabbit2.model.network.dto.item;
 
-import java.math.BigDecimal;
+import java.math.BigInteger;
 
 import com.thejoen.rabbit2.model.enumclass.ItemStatus;
 
@@ -14,7 +14,7 @@ public class ItemUpdateRequestDTO {
 	
 	private String content;
 	
-	private BigDecimal price;
+	private BigInteger price;
 			
 	private ItemStatus status;
 	
@@ -23,7 +23,7 @@ public class ItemUpdateRequestDTO {
 	private Long buyerId;
 
 	@Builder
-	public ItemUpdateRequestDTO(String title, String content, BigDecimal price, ItemStatus status, Long categoryId, Long buyerId) {
+	public ItemUpdateRequestDTO(String title, String content, BigInteger price, ItemStatus status, Long categoryId, Long buyerId) {
 		this.title = title;
 		this.content = content;
 		this.price = price;

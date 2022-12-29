@@ -33,7 +33,7 @@ public class MemberService {
 	private final PasswordEncoder passwordEncoder;
 	
 	@Transactional
-	public ResponseEntity<MemberResponseDTO> create(MemberCreateRequestDTO request) {
+	public ResponseEntity<Long> create(MemberCreateRequestDTO request) {
 		Region region = regionRepository.findByAddress(request.getAddress())
 				.orElseThrow(() -> new RegionNotFoundException());
 		
@@ -47,7 +47,7 @@ public class MemberService {
 				);
 		
 		return ResponseEntity.status(HttpStatus.CREATED).
-				body(new MemberResponseDTO(member));
+				body(member.getId());
 	}
 	
 	public ResponseEntity<MemberResponseDTO> read(Long id) {
@@ -58,7 +58,7 @@ public class MemberService {
 	}
 
 	@Transactional
-	public ResponseEntity<MemberResponseDTO> update(Long id, MemberUpdateRequestDTO memberRequestDTO) {
+	public ResponseEntity<Long> update(Long id, MemberUpdateRequestDTO memberRequestDTO) {
 		Member member=memberRepository.findById(id)
 				.orElseThrow(() -> new MemberNotFoundException());
 		
@@ -67,7 +67,7 @@ public class MemberService {
 		
 		member.updateProfile(nickname, picture);
 		
-		return ResponseEntity.ok(new MemberResponseDTO(member));
+		return ResponseEntity.ok(member.getId());
 	}
 	
 	@Transactional

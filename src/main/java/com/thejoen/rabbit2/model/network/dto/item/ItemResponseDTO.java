@@ -1,12 +1,11 @@
 package com.thejoen.rabbit2.model.network.dto.item;
 
-import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 
-import com.thejoen.rabbit2.model.entity.Category;
 import com.thejoen.rabbit2.model.entity.Item;
 import com.thejoen.rabbit2.model.enumclass.ItemStatus;
-import com.thejoen.rabbit2.model.network.dto.category.CategoryListResponseDTO;
+import com.thejoen.rabbit2.model.network.Time;
 import com.thejoen.rabbit2.model.network.dto.category.CategoryResponseDTO;
 import com.thejoen.rabbit2.model.network.dto.member.MemberResponseDTO;
 
@@ -21,7 +20,7 @@ public class ItemResponseDTO {
 	
 	private String content;
 	
-	private BigDecimal price;
+	private BigInteger price;
 	
 	private ItemStatus status;
 	
@@ -29,13 +28,13 @@ public class ItemResponseDTO {
 	
 	private int likeCount;
 	
+	private String town;
+	
 	private MemberResponseDTO seller;
 	
 	private CategoryResponseDTO category;
 	
-	private LocalDateTime createdAt;
-	
-	private LocalDateTime updatedAt;
+	private String updatedAt;
 	
 	public ItemResponseDTO(Item item) {
 		this.id = item.getId();
@@ -45,8 +44,8 @@ public class ItemResponseDTO {
 		this.status = item.getStatus();
 		this.viewCount = item.getViewCount();
 		this.likeCount = item.getLikeCount();
-		this.createdAt = item.getCreatedAt();
-		this.updatedAt = item.getUpdatedAt();
+		this.updatedAt = Time.convertLocalDateTimeToTime(item.getUpdatedAt());
+		this.town = item.getRegion().getCity() + " " + item.getRegion().getTown();
 		this.seller = new MemberResponseDTO(item.getSeller());
 		this.category = new CategoryResponseDTO(item.getCategory());
 	}

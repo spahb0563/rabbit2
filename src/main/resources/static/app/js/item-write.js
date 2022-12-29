@@ -1,19 +1,29 @@
-const write = {
+const itemWrite = {
     init: function () {
-        const _this = this;       
+        const _this = this;
         
         $('#btn-write').on('click', function () {
             _this.write();
-        });
+        }),
+        
+        $('#check-share').on('change', function () {
+			_this.share();
+		})
     },
 
     	write: function () {
+		
+		const share = $('#check-share').is(":checked");
+	
+		const price = share ? 0 : $('#price');
+		const status = share ? 'SHARING' : 'ON_SALE';
+	
         const data = {
 			title : $('#title').val(),
 			content  : $ ('#content').val(),
-			price : $('#price').val(),
-			status : 'ON_SALE',
-			sellerId : 2,
+			price : price,
+			status : status,
+			sellerId : 1,
 			categoryId : $('#category option:selected').val(),
 			regionId : 1
         }
@@ -26,15 +36,21 @@ const write = {
             data: JSON.stringify(data)
         }).done(function (result){
             alert('등록 완료');
-            console.log(result);
-            const item = result
-            //window.location.href= '/item/'+item.id;
+            window.location.href= '/item/'+ result;
         }).fail(function (error){
-			console.log(error)
             alert('등록 실패');
-        });
-    },
+        })},
+    
+        share : function () {
+			if($("#check-share").is(":checked")) {
+				$("#price").val(0);
+				$("#price").attr("disabled", true);
+			}else{
+				$("#price").attr("disabled", false);
+			}
+		}			
+		
 }
 
-write.init();
+itemWrite.init();
 

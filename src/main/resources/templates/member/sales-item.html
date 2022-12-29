@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+<body>
+	<th:block layout:fragment="content">
+		<main role="main">
+			<div class="container">
+				<div class="row mt-3">
+					<nav th:replace="fragment/left :: left"></nav>
+					<div class="col-md-9">
+						<h2>판매내역</h2>
+						<p th:if="${itemList == null}">판매 내역이 없습니다</p>
+						<div class="border-top pt-3 text-left">
+							<div class="px-3 mb-5">
+								<ul class="list-group list-group-flush">
+									<li th:each="item : ${itemList}" class="d-flex list-group-item border-0 py-1">
+										<a class="h-3 btn btn-light btn-block"
+											th:href="@{'/item/' + ${item.id}}">
+											<div class="d-flex">
+												<div>
+													<img style="width: 100px; height: 100px" th:src="@{/app/images/carrot.png}">
+												</div>
+												<div class="w-100 ml-3">
+													<span th:text="${item.title}" class="d-block h4 text-left"
+														style="word-wrap:break-word;"></span>
+													<span th:text="${item.updatedAt}" class="d-block text-left mb-1" style="word-wrap:break-word;"></span>
+													<div class="text-left">
+														<span th:text="${item.status.title}"class="badge badge-pill badge-warning"></span>
+														<span th:text="${#numbers.formatInteger(item.price, 0, 'COMMA')}+'원'"></span>
+													</div>
+												</div>
+											</div>
+										</a>
+									</li>
+								</ul>
+							</div>
+							<!-- <div>
+								<nav aria-label="Page navigation example">
+									<ul class="pagination pagination justify-content-center">
+										<c:if test="${endPage>pageCount}">
+											<c:set var="endPage" value="${pageCount}"></c:set>
+										</c:if>
+										<c:if test="${startPage>5}">
+											<li class="page-item">
+												<button class="page-link" value="${startPage-1}" aria-label="Previous">
+													<span aria-hidden="true">&laquo;</span>
+												</button>
+											</li>
+										</c:if>
+										<c:forEach var="i" begin="${startPage}" end="${endPage}">
+											<li class="page-item ${currentPage == i ? 'active' : ''}">
+												<button class="page-link" value="${i}">${i}</button></li>
+										</c:forEach>
+										<c:if test="${endPage<pageCount}">
+											<li class="page-item">
+												<button class="page-link" value="${endPage+1}" aria-label=" Next">
+													<span aria-hidden="true">&raquo;</span>
+												</button>
+											</li>
+										</c:if>
+									</ul>
+								</nav>
+							</div> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+	</th:block>
+</body>
+</html>

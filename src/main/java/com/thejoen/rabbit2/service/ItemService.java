@@ -1,6 +1,6 @@
 package com.thejoen.rabbit2.service;
 
-import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,6 +19,7 @@ import com.thejoen.rabbit2.model.entity.Category;
 import com.thejoen.rabbit2.model.entity.Item;
 import com.thejoen.rabbit2.model.entity.Member;
 import com.thejoen.rabbit2.model.entity.Region;
+import com.thejoen.rabbit2.model.enumclass.ItemStatus;
 import com.thejoen.rabbit2.model.network.Pagination;
 import com.thejoen.rabbit2.model.network.PaginationDTO;
 import com.thejoen.rabbit2.model.network.dto.item.ItemCreateRequestDTO;
@@ -45,10 +46,7 @@ public class ItemService {
 	private final RegionRepository regionRepository;
 	
 	@Transactional
-	public ResponseEntity<ItemResponseDTO> create(ItemCreateRequestDTO request) {
-		
-		ItemCreateRequestDTO itemRequestDTO = request;
-		
+	public ResponseEntity<Long> create(ItemCreateRequestDTO request) {
 		Member seller = memberRepository.findById(request.getSellerId())
 				.orElseThrow(()->new MemberNotFoundException());
 		
@@ -58,21 +56,21 @@ public class ItemService {
 		Region region = regionRepository.findById(request.getRegionId())
 				.orElseThrow(() -> new RegionNotFoundException());
 				
-		Item item = itemRepository.save(itemRequestDTO.toEntitiy(seller, category, region));
+		Item item = itemRepository.save(request.toEntitiy(seller, category, region));
 		
 		return ResponseEntity.status(HttpStatus.CREATED)
-				.body(new ItemResponseDTO(item));
-	}//create
+				.body(item.getId());
+	}
 	
 	public ResponseEntity<ItemResponseDTO> read(Long id) {
 		Item item = itemRepository.findById(id)
 				.orElseThrow(() -> new ItemNotFoundException());
 		
 		return ResponseEntity.ok(new ItemResponseDTO(item));
-	}//read
+	}
 	
 	@Transactional
-	public ResponseEntity<ItemResponseDTO> update(Long id, ItemUpdateRequestDTO request) {
+	public ResponseEntity<Long> update(Long id, ItemUpdateRequestDTO request) {
 		Item item = itemRepository.findById(id)
 				.orElseThrow(() -> new ItemNotFoundException());
 		
@@ -81,8 +79,8 @@ public class ItemService {
 		
 		item.update(request.getTitle(), request.getContent(), request.getPrice(), category);
 		
-		return ResponseEntity.ok(new ItemResponseDTO(item));
-	}//update
+		return ResponseEntity.ok(item.getId());
+	}
 	
 	@Transactional
 	public ResponseEntity delete(Long id) {
@@ -95,35 +93,25 @@ public class ItemService {
 	}
 	
 	@Transactional(readOnly = true)
-	public ResponseEntity<PaginationDTO<List<ItemListResponseDTO>>> search(String title, BigDecimal minPrice, BigDecimal maxPrice,
-			Pageable pageable) {
+	public ResponseEntity<PaginationDTO<ItemListResponseDTO>> findAllBySellerId(Long sellerId, Pageable pageable) {
 		
-		return ResponseEntity.ok(pagination(itemRepository.search(title, minPrice, maxPrice, pageable)));
+		return ResponseEntity.ok(new PaginationDTO<>(itemRepository.findAllBySellerId(sellerId, pageable)));
 	}
 	
-    private PaginationDTO<List<ItemListResponseDTO>> pagination(Page<Item> itemList) {
-        List<ItemListResponseDTO> itemListResponseDTOs = itemList.stream()
-                .map(item -> new ItemListResponseDTO(item))
-                .collect(Collectors.toList());
-
-        Pagination pagination = Pagination.builder()
-                .totalPages(itemList.getTotalPages())
-                .totalElements(itemList.getTotalElements())
-                .currentPage(itemList.getNumber())
-                .currentElements(itemList.getNumberOfElements())
-                .build();
-        		
-        return new PaginationDTO(itemListResponseDTOs, pagination);
-    }
+	@Transactional(readOnly = true)
+	public ResponseEntity<PaginationDTO<ItemListResponseDTO>> findAllByBuyerId(Long buyerId, Pageable pageable) {
 	
+		return ResponseEntity.ok(new PaginationDTO<>(itemRepository.findAllByBuyerId(buyerId, pageable)));
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@Transactional(readOnly = true)
+	public ResponseEntity<PaginationDTO<ItemListResponseDTO>> search(String title, 
+																			BigInteger minPrice, 
+																			BigInteger maxPrice, 
+																			ItemStatus status, 
+																			List<Long> categoryId,
+																			Pageable pageable) {
+		
+		return ResponseEntity.ok(new PaginationDTO<>(itemRepository.search(title, minPrice, maxPrice, status, categoryId, pageable)));
+	}
 }

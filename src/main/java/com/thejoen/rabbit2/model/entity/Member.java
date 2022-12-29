@@ -56,9 +56,9 @@ public class Member extends BaseTimeEntity{
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "sender")
 	private List<Message> sentMessageList;
-	
+	 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
-	private List<WishList> wishList;
+	private List<Wish> wishList;
 	 
 	@Builder
 	public Member(String email, String password, String nickname, MemberRole role) { 

@@ -1,6 +1,6 @@
 package com.thejoen.rabbit2.model.network.dto.item;
 
-import java.math.BigDecimal;
+import java.math.BigInteger;
 
 import com.thejoen.rabbit2.model.entity.Category;
 import com.thejoen.rabbit2.model.entity.Item;
@@ -18,7 +18,7 @@ public class ItemCreateRequestDTO {
 	
 	private String content;
 	
-	private BigDecimal price;
+	private BigInteger price;
 	
 	private ItemStatus status; 
 	
@@ -29,7 +29,7 @@ public class ItemCreateRequestDTO {
 	private Long regionId;
 
 	@Builder
-	public ItemCreateRequestDTO(String title, String content, BigDecimal price, ItemStatus status, Long sellerId, Long categoryId, Long regionId) {
+	public ItemCreateRequestDTO(String title, String content, BigInteger price, ItemStatus status, Long sellerId, Long categoryId, Long regionId) {
 		this.title = title;
 		this.content = content;
 		this.price = price;

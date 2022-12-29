@@ -16,13 +16,16 @@
 			   	<!-- 등록된 상품이 없습니다 -->
 		        <div class="row">
 					<div th:each="item : ${itemList}" class="col-md-3">
-						<a class="text-decoration-none text-dark" th:href="@{/}">
+						<a class="text-decoration-none text-dark" th:href="@{'/item/' + ${item.id}}">
 	                        <div class="mb-4 shadow-sm">
 	                        	<img class="bd-placeholder-img card-img-top" th:src="@{/app/images/carrot.png}" width="100%" height="200" />
 	                            <div class="card-body">
 									<p th:text="${item.title}" class="card-text h5" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis"></p>
-	                                <p th:text="${item.price}" class="card-text font-weight-bold"></p>
-                                    <p class="card-text my-0">서울시 강남구</p>
+	                                <p th:if="${#strings.equals(item.status, 'ON_SALE')}" th:text="${#numbers.formatInteger(item.price, 0, 'COMMA')}+'원'" class="card-text font-weight-bold"></p>
+									<p th:unless="${#strings.equals(item.status, 'ON_SALE')}">
+										<span th:text="${item.status.title}" style="min-width: 50px" class="badge badge-pill badge-warning"></span>
+									</p>
+                                    <p th:text="${item.town}" class="card-text my-0"></p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <small th:text="${item.updatedAt}" class="text-muted"></small>
                                         <small class="text-muted">

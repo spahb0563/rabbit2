@@ -24,12 +24,12 @@ public class LoginController {
         model.addAttribute("error", error);
         model.addAttribute("exception", exception);
 
-        return "login";
+        return "/login/login";
     }
 	
 	@GetMapping("/register")
     public String register() {
-        return "register";
+        return "/login/register";
     }
 	
 	
@@ -52,6 +52,6 @@ public class LoginController {
         model.addAttribute("email", account.getEmail());
         model.addAttribute("exception", exception);
 
-        return "user/login/denied";
+        return "/login/denied";
     }
 }

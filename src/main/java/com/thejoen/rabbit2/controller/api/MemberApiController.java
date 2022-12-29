@@ -24,18 +24,19 @@ public class MemberApiController {
 	
 	private final MemberService memberService;
 	
+	@PostMapping("/v1/member")
+	public ResponseEntity<Long> create(@RequestBody MemberCreateRequestDTO request) {
+		return memberService.create(request);
+	}
+	
 	@GetMapping("/v1/member/{id}")
 	public ResponseEntity<MemberResponseDTO> read(@PathVariable Long id) {
 		return memberService.read(id);
 	}
 	
-	@PostMapping("/v1/member")
-	public ResponseEntity<MemberResponseDTO> create(@RequestBody MemberCreateRequestDTO request) {
-		return memberService.create(request);
-	}
 
 	@PutMapping("/v1/member/{id}")
-	public ResponseEntity<MemberResponseDTO> update(@PathVariable Long id, @RequestBody MemberUpdateRequestDTO request) {
+	public ResponseEntity<Long> update(@PathVariable Long id, @RequestBody MemberUpdateRequestDTO request) {
 		return memberService.update(id, request);
 	}
 	

@@ -3,8 +3,10 @@ package com.thejoen.rabbit2.model.network.dto.member;
 import com.thejoen.rabbit2.model.entity.Member;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 public class MemberResponseDTO {
 	
 	private Long id;
